@@ -7,4 +7,24 @@ body {
   max-width: 100ch;
   margin-inline: auto;
   padding: 1rem;
+
+  nav ul,
+  nav li {
+    display: contents;
+  }
+
+  nav {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+
+  nav a {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0.5em;
+  }
+
 }
