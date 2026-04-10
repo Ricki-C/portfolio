@@ -2,7 +2,7 @@ body {
   font: 100%/1.5 system-ui;
   max-width: 100ch;
   margin: 0 auto;
-  padding: 0;
+  padding-inline: 1rem;
 }
 
 html {
@@ -57,10 +57,6 @@ h6 {
   text-wrap: balance;
 }
 
-h1 {
-  font-size: 400%;
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -102,5 +98,12 @@ button {
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.projects article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
   gap: 1em;
 }
