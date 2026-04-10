@@ -63,8 +63,20 @@ img {
   display: block;
 }
 
+label,
+input,
+textarea,
+button {
+  display: block;
+}
+
 input,
 textarea,
 button {
   font: inherit;
+}
+
+
+label {
+  margin-block: 0.5em;
 }
