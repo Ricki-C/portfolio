@@ -41,7 +41,6 @@ nav a:hover {
   border-bottom: 0.35em solid var(--color-hover);
   padding-bottom: 0.15em;
   background-color: var(--color-hover-bg);
-  font-weight: bold;
 }
 
 main {
