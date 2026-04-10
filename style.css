@@ -70,26 +70,27 @@ button {
   box-sizing: border-box;
 }
 
-.form-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-block: 0.75em;
+form {
+  display: grid;
+  grid-template-columns: 5em 1fr;
+  gap: 1em;
+  align-items: start;
 }
 
-.form-row label {
+label {
   font-weight: bold;
 }
 
-.form-row input,
-.form-row textarea {
-  flex: 1;
+input,
+textarea {
+  width: 100%;
 }
 
 textarea {
-  min-height: 5em;
+  min-height: 6em;
 }
 
 button {
-  margin-top: 0.5em;
+  grid-column: 1 / -1;
+  width: 100%;
 }
