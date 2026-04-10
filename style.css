@@ -7,8 +7,10 @@ body {
 
 html {
   --color-accent: oklch(70% 0.12 200);
+  --color-hover: oklch(65% 0.18 20);
   accent-color: var(--color-accent);
 }
+
 
 nav ul,
 nav li {
@@ -36,6 +38,7 @@ nav a.current {
   font-weight: bold;
   color: var(--color-accent);
 }
+
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
