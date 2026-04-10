@@ -62,3 +62,9 @@ img {
   height: auto;
   display: block;
 }
+
+input,
+textarea,
+button {
+  font: inherit;
+}
