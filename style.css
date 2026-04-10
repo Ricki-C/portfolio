@@ -27,18 +27,23 @@ nav a {
   color: inherit;
   text-align: center;
   padding: 0.5em;
+  transition: color 0.2s, font-size 0.2s, font-weight 0.2s, background-color 0.2s;
 }
 
 nav a.current {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
   font-weight: bold;
+  color: var(--color-accent);
 }
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
   background-color: oklch(from var(--color-accent) 95% 0.02 h);
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 1.05em;
 }
 
 main {
