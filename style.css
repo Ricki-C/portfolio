@@ -1,12 +1,7 @@
 body {
-  /* Base typography */
   font: 100%/1.5 system-ui;
-
-  /* Prevent content from getting too wide */
   max-width: 100ch;
-  margin-inline: auto;
-
-  /* Remove default big body spacing at top */
+  margin: 0 auto;
   padding: 0;
 }
 
