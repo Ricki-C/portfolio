@@ -1,5 +1,6 @@
 body {
   font: 100%/1.5 system-ui;
+  width: 90%; /* 新增：强制左右两边合计留出 10% 的空白 */
   max-width: 100ch;
   margin: 0 auto;
   padding-inline: 1rem;
