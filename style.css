@@ -5,6 +5,11 @@ body {
   padding: 0;
 }
 
+html {
+  --color-accent: oklch(70% 0.12 200);
+  accent-color: var(--color-accent);
+}
+
 nav ul,
 nav li {
   display: contents;
@@ -12,8 +17,8 @@ nav li {
 
 nav {
   display: flex;
-  border-bottom: 1px solid #ccc;
   margin-bottom: 1rem;
+  border-bottom: 1px solid oklch(80% 0.03 200);
 }
 
 nav a {
@@ -25,13 +30,15 @@ nav a {
 }
 
 nav a.current {
-  border-bottom: 0.3em solid #b7c3c3;
+  border-bottom: 0.4em solid var(--color-accent);
+  padding-bottom: 0.1em;
   font-weight: bold;
 }
 
 nav a:hover {
-  border-bottom: 0.3em solid #999;
-  background-color: #f5f5f5;
+  border-bottom: 0.4em solid var(--color-accent);
+  padding-bottom: 0.1em;
+  background-color: oklch(from var(--color-accent) 95% 0.02 h);
 }
 
 main {
@@ -45,6 +52,7 @@ h4,
 h5,
 h6 {
   line-height: 1.1;
+  text-wrap: balance;
 }
 
 img {
