@@ -1,6 +1,6 @@
 body {
-  font: 100%/1.5 system-ui;
-  width: 90%; /* 新增：强制左右两边合计留出 10% 的空白 */
+  font: 100%/1.5 system-ui, sans-serif;
+  width: 90%;
   max-width: 100ch;
   margin: 0 auto;
   padding-inline: 1rem;
@@ -130,14 +130,6 @@ html {
   --color-hover: #ff4fa3;
   --color-hover-bg: #f8e6ec;
   color-scheme: light;
-}
-
-body {
-  font: 100%/1.5 system-ui, sans-serif;
-  width: 90%;
-  max-width: 100ch;
-  margin: 0 auto;
-  padding-inline: 1rem;
 }
 
 main {
