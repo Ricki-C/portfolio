@@ -23,18 +23,6 @@ body {
   margin: 0;
 }
 
-
-h1 {
-  font-size: 400%;
-}
-
-
-html {
-  --color-accent: #b8c4c4;
-  --color-hover: #ff4fa3;
-  --color-hover-bg: #f8e6ec;
-}
-
 nav ul,
 nav li {
   display: contents;
@@ -122,9 +110,6 @@ button {
   width: 100%;
 }
 
-
-
-
 html {
   --color-accent: #b8c4c4;
   --color-hover: #ff4fa3;
@@ -132,31 +117,11 @@ html {
   color-scheme: light;
 }
 
-main {
-  padding: 1rem;
-}
 
 h1 {
   font-size: 400%;
   margin-bottom: 0.5em;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  line-height: 1.1;
-  text-wrap: balance;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
 
 /* resume page only */
 .resume-page {
