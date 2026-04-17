@@ -39,3 +39,14 @@ for (let p of pages) {
 
   nav.append(a);
 }
+
+// select all links inside nav
+let navLinks = $$("nav a");
+
+// find the nav link that matches the current page URL
+let currentLink = navLinks.find(
+  (a) => a.host === location.host && a.pathname === location.pathname
+);
+
+// add the current class to the matched nav link
+currentLink?.classList.add("current");
