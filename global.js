@@ -15,12 +15,9 @@ let pages = [
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
-const isLocal =
-  location.hostname === "localhost" ||
-  location.hostname === "127.0.0.1" ||
-  location.hostname === "";
-
-const BASE_PATH = isLocal ? "/" : "/PORTFOLIO/";
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/"
+  : "/PORTFOLIO/";
 
 for (let p of pages) {
   let url = p.url;
@@ -28,17 +25,19 @@ for (let p of pages) {
 
   url = !url.startsWith('http') ? BASE_PATH + url : url;
 
-  let a = document.createElement('a');
-  a.href = url;
-  a.textContent = title;
-
-  if (a.host === location.host && a.pathname === location.pathname) {
-    a.classList.add('current');
-  }
-
-  if (a.host !== location.host) {
-    a.target = '_blank';
-  }
-
-  nav.append(a);
+  nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
 }
+
+// select all links inside nav
+let navLinks = $$("nav a");
+console.log(navLinks);
+
+// find the nav link that matches the current page URL
+let currentLink = navLinks.find(
+  (a) => a.host === location.host && a.pathname === location.pathname
+);
+
+console.log(currentLink);
+
+// add the current class to the matched nav link
+currentLink?.classList.add("current");
