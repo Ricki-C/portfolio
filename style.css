@@ -58,6 +58,18 @@ nav a:hover {
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
+/*for scheme position*/
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+}
+
+select {
+  font: inherit;
+}
+
 main {
   padding: 1rem;
 }

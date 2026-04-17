@@ -29,6 +29,12 @@ document.body.insertAdjacentHTML(
   `
 );
 
+let select = document.querySelector('.color-scheme select');
+
+select.addEventListener('input', function (event) {
+  document.documentElement.style.setProperty('color-scheme', event.target.value);
+});
+
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"
   : "/portfolio/";
