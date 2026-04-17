@@ -8,5 +8,13 @@ function $$(selector, context = document) {
 let navLinks = $$("nav a");
 console.log(navLinks);
 
-// print them in console for checking
-console.log(navLinks);
+// find the nav link that matches the current page URL
+let currentLink = navLinks.find(
+  (a) => a.host === location.host && a.pathname === location.pathname,
+);
+
+console.log(currentLink);
+
+// add the current class to the matched nav link
+currentLink?.classList.add("current");
+
