@@ -30,17 +30,17 @@ nav li {
 
 
 nav {
+  --border-color: oklch(50% 10% 200 / 40%);
   display: flex;
   margin-top: 3rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--border-color);
 }
-
 
 nav a {
   flex: 1;
   text-decoration: none;
-  color: black;
+  color: inherit;
   text-align: center;
   padding: 0.5em;
   transition: 0.2s;
@@ -55,7 +55,7 @@ nav a.current {
 nav a:hover {
   border-bottom: 0.35em solid var(--color-hover);
   padding-bottom: 0.15em;
-  background-color: var(--color-hover-bg);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
 main {
@@ -114,7 +114,7 @@ html {
   --color-accent: #b8c4c4;
   --color-hover: #ff4fa3;
   --color-hover-bg: #f8e6ec;
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
 
