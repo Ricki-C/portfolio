@@ -37,21 +37,5 @@ for (let p of pages) {
     a.target = '_blank';
   }
 
-  // new add
-  console.log(a.href);
   nav.append(a);
 }
-
-// select all links inside nav
-let navLinks = $$("nav a");
-console.log(navLinks);
-
-// find the nav link that matches the current page URL
-let currentLink = navLinks.find(
-  (a) => a.host === location.host && a.pathname === location.pathname
-);
-
-console.log(currentLink);
-
-// add the current class to the matched nav link
-currentLink?.classList.add("current");
