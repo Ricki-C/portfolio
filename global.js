@@ -19,11 +19,11 @@ console.log(currentLink);
 currentLink?.classList.add("current");
 
 let pages = [
-  { url: '', title: 'Home' },
-  { url: 'projects/', title: 'Projects' },
-  { url: 'contact/', title: 'Contact' },
+  { url: '/', title: 'Home' },
+  { url: '/projects.html', title: 'Projects' },
+  { url: '/contact.html', title: 'Contact' },
   { url: 'https://github.com/ricki-c', title: 'Profile' },
-  { url: 'resume/', title: 'Resume' },
+  { url: '/resume.html', title: 'Resume' },
 ];
 
 let nav = document.createElement('nav');
