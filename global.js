@@ -53,5 +53,3 @@ console.log(currentLink);
 
 // add the current class to the matched nav link
 currentLink?.classList.add("current");
-
-你看看这个怎么修改
