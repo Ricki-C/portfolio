@@ -17,7 +17,7 @@ document.body.prepend(nav);
 
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"
-  : "/PORTFOLIO/";
+  : "/portfolio/";
 
 for (let p of pages) {
   let url = p.url;
@@ -36,6 +36,8 @@ for (let p of pages) {
   if (a.host !== location.host) {
     a.target = '_blank';
   }
+
+  // new add
   console.log(a.href);
   nav.append(a);
 }
