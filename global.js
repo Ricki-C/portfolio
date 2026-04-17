@@ -36,7 +36,7 @@ for (let p of pages) {
   if (a.host !== location.host) {
     a.target = '_blank';
   }
-
+  console.log(a.href);
   nav.append(a);
 }
 
