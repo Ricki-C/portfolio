@@ -1,64 +1,75 @@
 [
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde expedita modi sapiente maxime asperiores? Doloribus dignissimos, doloremque non porro, molestiae assumenda consequatur vero voluptatum, cum reiciendis earum quidem corrupti inventore."
-    },
-    {
-        "title": "Et repudiandae laboriosam culpa!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Magni eum, deleniti ullam assumenda doloribus consequatur consectetur quaerat nesciunt adipisci vitae quisquam laborum ducimus corrupti non sit culpa ad maxime pariatur ipsum, iure accusamus optio nostrum. Tempore, tenetur accusamus?"
-    },
-    {
-        "title": "Dolorum repellat illo dicta.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Sit quam exercitationem quidem suscipit expedita pariatur impedit beatae possimus repellat ullam eum rerum officiis fugiat repellendus maiores, dolores maxime, molestias quas iste id nemo sapiente! Mollitia, dolorum voluptate. Animi?"
-    },
-    {
-        "title": "Dolores iure obcaecati optio!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Explicabo maxime amet aperiam quisquam dolores magnam nesciunt vitae labore, rerum saepe est numquam ipsa minima, voluptas debitis quia velit inventore perspiciatis aut hic! Nobis aut perferendis voluptate quis. Saepe!"
-    },
-    {
-        "title": "Beatae maxime dignissimos unde!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Tempore minus cupiditate consequatur, ipsam impedit ratione eum architecto corrupti, placeat, laudantium at dolorum iste! Rerum doloremque accusantium saepe commodi facilis ea, laudantium reiciendis optio aspernatur ex rem mollitia repudiandae."
-    },
-    {
-        "title": "Hic voluptas alias laudantium?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Ipsam amet magnam nisi sequi possimus doloribus itaque tempora in enim. Odit dolorum quos amet error at eveniet doloribus repudiandae nam corrupti molestiae, esse dolorem commodi maiores illo. Similique, praesentium!"
-    },
-    {
-        "title": "Porro veritatis nisi sed?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Perferendis vero nulla amet, laudantium, provident beatae earum ut corrupti reiciendis perspiciatis consectetur unde? Obcaecati, suscipit. Dolorum quo neque unde earum dolores impedit voluptatum, minima quasi expedita repudiandae veritatis sit?"
-    },
-    {
-        "title": "Voluptates dolor excepturi quos.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Odit sequi molestiae earum tempore ratione, quam rem nam quo ex iste, cumque nemo, delectus cupiditate enim dolores inventore ipsam harum dicta excepturi! Quam impedit quis, voluptates illum reiciendis quia?"
-    },
-    {
-        "title": "Labore dignissimos atque illum.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Sit aspernatur architecto est molestias dolores quo libero aliquid totam quod quidem optio, atque possimus, explicabo sequi repudiandae unde excepturi laudantium. Officiis ullam recusandae, nostrum voluptates dicta aliquid reiciendis soluta."
-    },
-    {
-        "title": "Voluptatum necessitatibus sit at!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Architecto, ad accusamus delectus dicta, ex illo pariatur atque, tenetur cupiditate nam laudantium neque numquam debitis rem nihil excepturi nobis tempore repudiandae cum a sed qui quaerat unde? Doloremque, ratione."
-    },
-    {
-        "title": "Alias quas esse quis.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Cum sint quas ducimus recusandae sed mollitia maiores voluptatibus nostrum ipsam eos praesentium enim assumenda, autem labore deserunt molestiae. Iure itaque enim quisquam eaque aspernatur eveniet magnam labore voluptas laudantium."
-    },
-    {
-        "title": "Quisquam fugiat et unde.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Atque quos quod laborum perspiciatis dolorem. Dignissimos vel temporibus est delectus doloremque architecto nihil error aliquam labore vero expedita quam laudantium aperiam, animi, quo fugiat eveniet dolorum et libero deleniti?"
-    }
+  {
+    "title": "Early Coding Practice Collection",
+    "year": "2023",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Built early small coding exercises and problem-solving projects while developing programming foundations."
+  },
+  {
+    "title": "Intro Data Analysis Practice",
+    "year": "2023",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Practiced basic data cleaning, summary statistics, and simple visualizations using beginner datasets."
+  },
+  {
+    "title": "DSC106 Lab 1 Personal Site Setup",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Built the initial structure of my personal portfolio website using HTML."
+  },
+  {
+    "title": "DSC106 Lab 2 Portfolio Styling",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Improved the layout and appearance of my site with CSS styling, spacing, and typography."
+  },
+  {
+    "title": "Java Programming Practice",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Worked on Java exercises involving loops, arrays, methods, and object-oriented programming basics."
+  },
+  {
+    "title": "DSC106 Lab 3 Dark Mode Website",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Added JavaScript functionality such as reusable navigation and dark mode support to my portfolio."
+  },
+  {
+    "title": "DSC106 Lab 4 Dynamic Portfolio with JSON",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Converted my portfolio into a data-driven website by loading project information from JSON."
+  },
+  {
+    "title": "DSC106 Project 1 Food Processing Visualization",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Created visualizations to analyze food processing scores and nutrition patterns in grocery products."
+  },
+  {
+    "title": "DSC106 Project 2 Rhetorical Visualization",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Designed a persuasive visualization project using rhetorical framing and intentional visual choices."
+  },
+  {
+    "title": "Portfolio GitHub Stats API Feature",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Fetched live GitHub profile statistics with the GitHub API and displayed them on my homepage."
+  },
+  {
+    "title": "Machine Learning Image Classification Project",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Developed an image classification project using machine learning models and structured evaluation."
+  },
+  {
+    "title": "Future Research and Data Science Project",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder for a future research or data science project that I will expand with real details later."
+  }
 ]
-
 
