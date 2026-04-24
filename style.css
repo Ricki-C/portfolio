@@ -174,3 +174,27 @@ h1 {
   border-radius: 999px;
   margin: 0;
 }
+
+#profile-stats {
+  margin: 2em 0;
+}
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  color: #7a7f8c;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin-bottom: 0.3em;
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 2rem;
+}
