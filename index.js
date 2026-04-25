@@ -23,11 +23,8 @@ if (profileStats) {
 }
 
 const projects = await fetchJSON('./lib/projects.json');
+const latestProjects = projects.slice(0, 3);
 const projectsContainer = document.querySelector('.projects');
-
-const latestProjects = projects
-  .sort((a, b) => Number(b.year) - Number(a.year))
-  .slice(0, 3);
 
 renderProjects(latestProjects, projectsContainer, 'h2');
 
