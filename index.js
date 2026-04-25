@@ -43,7 +43,3 @@ profileStats.innerHTML = `
     <dd>${githubData.following}</dd>
   </dl>
 `;
-
-const latestProjects = projects
-  .sort((a, b) => Number(b.year) - Number(a.year))
-  .slice(0, 3);
