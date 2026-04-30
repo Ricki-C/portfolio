@@ -205,3 +205,9 @@ h1 {
   margin: 0;
   font-size: 2rem;
 }
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
