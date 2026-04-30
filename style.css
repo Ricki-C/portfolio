@@ -23,6 +23,13 @@ body {
   margin: 0;
 }
 
+.project-year {
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
+  color: gray;
+  margin-top: 0.5em;
+}
+
 nav ul,
 nav li {
   display: contents;
