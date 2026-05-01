@@ -8,6 +8,8 @@ let query = '';
 
 renderProjects(projects, projectsContainer, 'h2');
 
+renderPieChart(projects);
+
 let searchInput = document.querySelector('.searchBar');
 
 searchInput.addEventListener('input', (event) => {
@@ -19,42 +21,49 @@ searchInput.addEventListener('input', (event) => {
   });
 
   renderProjects(filteredProjects, projectsContainer, 'h2');
+  renderPieChart(filteredProjects);
 });
 
-let rolledData = d3.rollups(
-  projects,
-  (v) => v.length,
-  (d) => d.year
-);
+function renderPieChart(projectsGiven) {
+  let rolledData = d3.rollups(
+    projectsGiven,
+    (v) => v.length,
+    (d) => d.year
+  );
 
-let data = rolledData.map(([year, count]) => {
-  return { value: count, label: year };
-});
+  let data = rolledData.map(([year, count]) => {
+    return { value: count, label: year };
+  });
 
-let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-let sliceGenerator = d3.pie().value((d) => d.value);
+  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  let sliceGenerator = d3.pie().value((d) => d.value);
 
-let arcData = sliceGenerator(data);
-let arcs = arcData.map((d) => arcGenerator(d));
+  let arcData = sliceGenerator(data);
+  let arcs = arcData.map((d) => arcGenerator(d));
 
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-arcs.forEach((arc, idx) => {
-  d3.select('#projects-pie-plot')
-    .append('path')
-    .attr('d', arc)
-    .attr('fill', colors(idx));
-});
+  let svg = d3.select('#projects-pie-plot');
+  svg.selectAll('path').remove();
 
-let legend = d3.select('.legend');
+  let legend = d3.select('.legend');
+  legend.selectAll('li').remove();
 
-data.forEach((d, idx) => {
-  legend
-    .append('li')
-    .attr('class', 'legend-item')
-    .attr('style', `--color: ${colors(idx)}`)
-    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-});
+  arcs.forEach((arc, idx) => {
+    svg
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', colors(idx));
+  });
+
+  data.forEach((d, idx) => {
+    legend
+      .append('li')
+      .attr('class', 'legend-item')
+      .attr('style', `--color: ${colors(idx)}`)
+      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+  });
+}
 
 const projectsTitle = document.querySelector('.projects-title');
 projectsTitle.textContent = `${projects.length} Projects`;
