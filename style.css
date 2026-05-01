@@ -230,9 +230,12 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
   gap: 0.5em 1em;
   list-style: none;
-  padding: 0;
+  padding: 1em;
   margin: 1em 0;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
 }
+
 
 .legend-item {
   display: flex;
