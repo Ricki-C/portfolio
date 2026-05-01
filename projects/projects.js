@@ -6,6 +6,7 @@ const projectsContainer = document.querySelector('.projects');
 
 let query = '';
 let selectedYear = null;
+let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
 applyFilters();
 
@@ -58,7 +59,7 @@ function renderPieChart(projectsGiven) {
     svg
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors(idx))
+      .attr('fill', colorScale(d.label))
       .attr('class', data[idx].label == selectedYear ? 'selected' : '')
       .on('click', () => {
         let clickedYear = data[idx].label;
@@ -71,7 +72,7 @@ function renderPieChart(projectsGiven) {
     legend
       .append('li')
       .attr('class', d.label == selectedYear ? 'legend-item selected' : 'legend-item')
-      .attr('style', `--color: ${colors(idx)}`)
+      .attr('style', `--color: ${colorScale(d.label)}`)
       .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
   });
 }
