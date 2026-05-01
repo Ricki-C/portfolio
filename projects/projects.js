@@ -6,7 +6,7 @@ const projectsContainer = document.querySelector('.projects');
 
 renderProjects(projects, projectsContainer, 'h2');
 
-let data = [1, 2];
+let data = [1, 2, 3, 4, 5, 5];
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let sliceGenerator = d3.pie();
@@ -14,13 +14,13 @@ let sliceGenerator = d3.pie();
 let arcData = sliceGenerator(data);
 let arcs = arcData.map((d) => arcGenerator(d));
 
-let colors = ['gold', 'purple'];
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 arcs.forEach((arc, idx) => {
   d3.select('#projects-pie-plot')
     .append('path')
     .attr('d', arc)
-    .attr('fill', colors[idx]);
+    .attr('fill', colors(idx));
 });
 
 const projectsTitle = document.querySelector('.projects-title');
