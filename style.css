@@ -77,25 +77,10 @@ select {
   font: inherit;
 }
 
-.selected {
-  --color: oklch(60% 45% 0) !important;
-}
-
-.selected:is(path) {
-  fill: var(--color);
-}
 
 #projects-pie-plot path {
   transition: 300ms;
   cursor: pointer;
-}
-
-
-.legend-item.selected {
-  font-weight: bold;
-  outline: 1px solid #aaa;
-  border-radius: 0.4em;
-  padding: 0.3em 0.5em;
 }
 
 main {
