@@ -251,3 +251,11 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 0.5em;
 }
+
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+#projects-pie-plot path {
+  transition: 300ms;
+}
