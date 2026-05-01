@@ -6,17 +6,22 @@ const projectsContainer = document.querySelector('.projects');
 
 renderProjects(projects, projectsContainer, 'h2');
 
+let data = [1, 2];
+
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+let sliceGenerator = d3.pie();
 
-let arc = arcGenerator({
-  startAngle: 0,
-  endAngle: 2 * Math.PI,
+let arcData = sliceGenerator(data);
+let arcs = arcData.map((d) => arcGenerator(d));
+
+let colors = ['gold', 'purple'];
+
+arcs.forEach((arc, idx) => {
+  d3.select('#projects-pie-plot')
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', colors[idx]);
 });
-
-d3.select('#projects-pie-plot')
-  .append('path')
-  .attr('d', arc)
-  .attr('fill', 'red');
 
 const projectsTitle = document.querySelector('.projects-title');
 projectsTitle.textContent = `${projects.length} Projects`;
