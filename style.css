@@ -235,3 +235,10 @@ h1 {
   background-color: var(--color);
   border-radius: 50%;
 }
+
+.chart-container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  margin-block: 2em;
+}
