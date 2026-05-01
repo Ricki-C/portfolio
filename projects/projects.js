@@ -22,6 +22,7 @@ searchInput.addEventListener('input', (event) => {
     return values.includes(query);
   });
 
+  selectedIndex = -1;
   renderProjects(filteredProjects, projectsContainer, 'h2');
   renderPieChart(filteredProjects);
 });
