@@ -4,6 +4,8 @@ import { fetchJSON, renderProjects } from '../global.js';
 const projects = await fetchJSON('../lib/projects.json');
 const projectsContainer = document.querySelector('.projects');
 
+let query = '';
+
 renderProjects(projects, projectsContainer, 'h2');
 
 let rolledData = d3.rollups(
