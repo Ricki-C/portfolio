@@ -53,8 +53,37 @@ function renderPieChart(projectsGiven) {
     svg
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors(idx));
+      .attr('fill', colors(idx))
+      .attr('class', idx === selectedIndex ? 'selected' : '')
+      .on('click', () => {
+        selectedIndex = selectedIndex === idx ? -1 : idx;
+
+        svg
+          .selectAll('path')
+          .attr('class', (_, pathIdx) =>
+            pathIdx === selectedIndex ? 'selected' : ''
+          );
+
+        legend
+          .selectAll('li')
+          .attr('class', (_, legendIdx) =>
+            legendIdx === selectedIndex ? 'legend-item selected' : 'legend-item'
+          );
+
+        if (selectedIndex === -1) {
+          renderProjects(projects, projectsContainer, 'h2');
+        } else {
+          let selectedYear = data[selectedIndex].label;
+
+          let filteredProjects = projects.filter((project) => {
+            return project.year == selectedYear;
+          });
+
+          renderProjects(filteredProjects, projectsContainer, 'h2');
+        }
+      });
   });
+
 
   data.forEach((d, idx) => {
     legend
