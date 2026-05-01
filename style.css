@@ -77,6 +77,19 @@ select {
   font: inherit;
 }
 
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
+
+#projects-pie-plot path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
 main {
   padding: 1rem;
 }
