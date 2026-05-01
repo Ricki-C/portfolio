@@ -8,6 +8,19 @@ let query = '';
 
 renderProjects(projects, projectsContainer, 'h2');
 
+let searchInput = document.querySelector('.searchBar');
+
+searchInput.addEventListener('input', (event) => {
+  query = event.target.value.toLowerCase();
+
+  let filteredProjects = projects.filter((project) => {
+    let values = Object.values(project).join('\n').toLowerCase();
+    return values.includes(query);
+  });
+
+  renderProjects(filteredProjects, projectsContainer, 'h2');
+});
+
 let rolledData = d3.rollups(
   projects,
   (v) => v.length,
