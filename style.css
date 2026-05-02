@@ -77,10 +77,6 @@ select {
   font: inherit;
 }
 
-
-.selected {
-  --color: oklch(60% 45% 0) !important;
-
 #projects-pie-plot path {
   transition: 300ms;
   cursor: pointer;
