@@ -249,6 +249,7 @@ h1 {
   align-items: center;
   gap: 2em;
   margin-block: 2em;
+  flex-wrap: wrap;
 }
 
 .searchBar {
