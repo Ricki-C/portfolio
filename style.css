@@ -267,3 +267,11 @@ h1 {
 #projects-pie-plot path {
   transition: 300ms;
 }
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
