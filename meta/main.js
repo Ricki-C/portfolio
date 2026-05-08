@@ -136,6 +136,10 @@ function renderScatterPlot(data, commits) {
     .attr('fill', 'steelblue')
     .on('mouseenter', (event, commit) => {
         renderTooltipContent(commit);
+        updateTooltipVisibility(true);
+    })
+    .on('mouseleave', () => {
+        updateTooltipVisibility(false);
     });
 }
 
@@ -165,3 +169,8 @@ let commits = processCommits(data);
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
+
+function updateTooltipVisibility(isVisible) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.hidden = !isVisible;
+}
