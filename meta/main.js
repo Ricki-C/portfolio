@@ -76,6 +76,35 @@ function displayStats(data) {
 let data = await loadData();
 let commits = processCommits(data);
 
-console.log(commits);
+renderCommitInfo(data, commits);
 
-displayStats(data);
+function renderCommitInfo(data, commits) {
+  const dl = d3.select('#stats')
+    .append('dl')
+    .attr('class', 'stats');
+
+  const totalLOC = data.length;
+  const totalCommits = commits.length;
+  const totalFiles = d3.group(data, (d) => d.file).size;
+  const maxDepth = d3.max(data, (d) => d.depth);
+  const longestLine = d3.max(data, (d) => d.length);
+  const avgLineLength = d3.mean(data, (d) => d.length);
+
+  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+  dl.append('dd').text(totalLOC);
+
+  dl.append('dt').text('Total commits');
+  dl.append('dd').text(totalCommits);
+
+  dl.append('dt').text('Files');
+  dl.append('dd').text(totalFiles);
+
+  dl.append('dt').text('Max depth');
+  dl.append('dd').text(maxDepth);
+
+  dl.append('dt').text('Longest line');
+  dl.append('dd').text(longestLine);
+
+  dl.append('dt').text('Average line length');
+  dl.append('dd').text(avgLineLength.toFixed(1));
+}

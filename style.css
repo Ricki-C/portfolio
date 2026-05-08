@@ -276,3 +276,21 @@ h1 {
 .selected:is(path) {
   fill: var(--color);
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.stats dt {
+  font-size: 0.8rem;
+  color: gray;
+  text-transform: uppercase;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 2rem;
+}
