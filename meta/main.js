@@ -13,10 +13,6 @@ async function loadData() {
   return data;
 }
 
-let data = await loadData();
-
-console.log(data);
-
 function processCommits(data) {
   return d3
     .groups(data, (d) => d.commit)
@@ -47,3 +43,39 @@ function processCommits(data) {
       return ret;
     });
 }
+
+function displayStats(data) {
+  const stats = document.querySelector('#stats');
+
+  const totalLOC = data.length;
+  const totalFiles = d3.group(data, (d) => d.file).size;
+  const totalCommits = d3.group(data, (d) => d.commit).size;
+  const avgLineLength = d3.mean(data, (d) => d.length);
+  const maxDepth = d3.max(data, (d) => d.depth);
+
+  stats.innerHTML = `
+    <dl class="stats">
+      <dt>Total lines of code</dt>
+      <dd>${totalLOC}</dd>
+
+      <dt>Total files</dt>
+      <dd>${totalFiles}</dd>
+
+      <dt>Total commits</dt>
+      <dd>${totalCommits}</dd>
+
+      <dt>Average line length</dt>
+      <dd>${avgLineLength.toFixed(1)}</dd>
+
+      <dt>Maximum depth</dt>
+      <dd>${maxDepth}</dd>
+    </dl>
+  `;
+}
+
+let data = await loadData();
+let commits = processCommits(data);
+
+console.log(commits);
+
+displayStats(data);
