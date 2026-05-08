@@ -79,32 +79,31 @@ let commits = processCommits(data);
 renderCommitInfo(data, commits);
 
 function renderCommitInfo(data, commits) {
-  const dl = d3.select('#stats')
+  const stats = d3.select('#stats');
+  stats.selectAll('*').remove();
+
+  const dl = stats
     .append('dl')
     .attr('class', 'stats');
 
-  const totalLOC = data.length;
   const totalCommits = commits.length;
   const totalFiles = d3.group(data, (d) => d.file).size;
+  const totalLOC = data.length;
   const maxDepth = d3.max(data, (d) => d.depth);
   const longestLine = d3.max(data, (d) => d.length);
-  const avgLineLength = d3.mean(data, (d) => d.length);
+  const maxLines = d3.max(commits, (d) => d.totalLines);
 
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(totalLOC);
+  const statItems = [
+    ['Commits', totalCommits],
+    ['Files', totalFiles],
+    ['Total LOC', totalLOC],
+    ['Max depth', maxDepth],
+    ['Longest line', longestLine],
+    ['Max lines', maxLines],
+  ];
 
-  dl.append('dt').text('Total commits');
-  dl.append('dd').text(totalCommits);
-
-  dl.append('dt').text('Files');
-  dl.append('dd').text(totalFiles);
-
-  dl.append('dt').text('Max depth');
-  dl.append('dd').text(maxDepth);
-
-  dl.append('dt').text('Longest line');
-  dl.append('dd').text(longestLine);
-
-  dl.append('dt').text('Average line length');
-  dl.append('dd').text(avgLineLength.toFixed(1));
+  for (let [label, value] of statItems) {
+    dl.append('dt').text(label);
+    dl.append('dd').text(value);
+  }
 }
