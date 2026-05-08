@@ -137,10 +137,25 @@ function renderScatterPlot(data, commits) {
     .on('mouseenter', (event, commit) => {
         renderTooltipContent(commit);
         updateTooltipVisibility(true);
+        updateTooltipPosition(event);
+    })
+    .on('mousemove', (event) => {
+        updateTooltipPosition(event);
     })
     .on('mouseleave', () => {
         updateTooltipVisibility(false);
+    })
+
+    .on('mousemove', (event) => {
+    updateTooltipPosition(event);
     });
+}
+
+function updateTooltipPosition(event) {
+  const tooltip = document.getElementById('commit-tooltip');
+
+  tooltip.style.left = `${event.clientX + 10}px`;
+  tooltip.style.top = `${event.clientY + 10}px`;
 }
 
 function renderTooltipContent(commit) {
