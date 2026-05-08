@@ -18,7 +18,6 @@ function processCommits(data) {
     .groups(data, (d) => d.commit)
     .map(([commit, lines]) => {
       let first = lines[0];
-
       let { author, date, time, timezone, datetime } = first;
 
       let ret = {
@@ -44,47 +43,11 @@ function processCommits(data) {
     });
 }
 
-function displayStats(data) {
-  const stats = document.querySelector('#stats');
-
-  const totalLOC = data.length;
-  const totalFiles = d3.group(data, (d) => d.file).size;
-  const totalCommits = d3.group(data, (d) => d.commit).size;
-  const avgLineLength = d3.mean(data, (d) => d.length);
-  const maxDepth = d3.max(data, (d) => d.depth);
-
-  stats.innerHTML = `
-    <dl class="stats">
-      <dt>Total lines of code</dt>
-      <dd>${totalLOC}</dd>
-
-      <dt>Total files</dt>
-      <dd>${totalFiles}</dd>
-
-      <dt>Total commits</dt>
-      <dd>${totalCommits}</dd>
-
-      <dt>Average line length</dt>
-      <dd>${avgLineLength.toFixed(1)}</dd>
-
-      <dt>Maximum depth</dt>
-      <dd>${maxDepth}</dd>
-    </dl>
-  `;
-}
-
-let data = await loadData();
-let commits = processCommits(data);
-
-renderCommitInfo(data, commits);
-
 function renderCommitInfo(data, commits) {
   const stats = d3.select('#stats');
   stats.selectAll('*').remove();
 
-  const dl = stats
-    .append('dl')
-    .attr('class', 'stats');
+  const dl = stats.append('dl').attr('class', 'stats');
 
   const totalCommits = commits.length;
   const totalFiles = d3.group(data, (d) => d.file).size;
@@ -151,19 +114,16 @@ function renderScatterPlot(data, commits) {
     .axisLeft(yScale)
     .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
 
-  // Add x axis
   svg
     .append('g')
     .attr('transform', `translate(0, ${usableArea.bottom})`)
     .call(xAxis);
 
-  // Add y axis
   svg
     .append('g')
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
 
-  // Add dots after axes
   const dots = svg.append('g').attr('class', 'dots');
 
   dots
