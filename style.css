@@ -373,3 +373,29 @@ circle:hover {
 circle.selected {
   fill: #ff6b6b;
 }
+
+.language-breakdown {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.language-item dt {
+  font-size: 0.75rem;
+  color: #7a8190;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.language-item dd {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.language-item .percent {
+  color: #7a8190;
+  font-size: 0.9rem;
+}
