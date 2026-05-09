@@ -179,6 +179,7 @@ function brushed(event) {
   );
 
   renderSelectionCount(selection);
+  renderLanguageBreakdown(selection);
 }
 
 function renderSelectionCount(selection) {
@@ -191,6 +192,40 @@ function renderSelectionCount(selection) {
   countElement.textContent = `${selectedCommits.length || 'No'} commits selected`;
 
   return selectedCommits;
+}
+
+function renderLanguageBreakdown(selection) {
+  const selectedCommits = selection
+    ? commits.filter((d) => isCommitSelected(selection, d))
+    : [];
+
+  const container = document.getElementById('language-breakdown');
+
+  if (selectedCommits.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const requiredCommits = selectedCommits.length ? selectedCommits : commits;
+  const lines = requiredCommits.flatMap((d) => d.lines);
+
+  const breakdown = d3.rollup(
+    lines,
+    (v) => v.length,
+    (d) => d.type
+  );
+
+  container.innerHTML = '';
+
+  for (const [language, count] of breakdown) {
+    const proportion = count / lines.length;
+    const formatted = d3.format('.1%')(proportion);
+
+    container.innerHTML += `
+      <dt>${language}</dt>
+      <dd>${count} lines (${formatted})</dd>
+    `;
+  }
 }
 
 function isCommitSelected(selection, commit) {
