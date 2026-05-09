@@ -244,8 +244,25 @@ function isCommitSelected(selection, commit) {
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
 
-  tooltip.style.left = `${event.clientX + 10}px`;
-  tooltip.style.top = `${event.clientY + 10}px`;
+  const offset = 12;
+
+  let left = event.clientX + offset;
+  let top = event.clientY + offset;
+
+  const tooltipRect = tooltip.getBoundingClientRect();
+
+  // If tooltip goes beyond right edge, move it to the left of cursor
+  if (left + tooltipRect.width > window.innerWidth) {
+    left = event.clientX - tooltipRect.width - offset;
+  }
+
+  // If tooltip goes beyond bottom edge, move it above cursor
+  if (top + tooltipRect.height > window.innerHeight) {
+    top = event.clientY - tooltipRect.height - offset;
+  }
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
 }
 
 function renderTooltipContent(commit) {
