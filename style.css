@@ -350,6 +350,10 @@ circle {
   transition: 200ms;
   transform-origin: center;
   transform-box: fill-box;
+
+  @starting-style {
+    r: 0;
+  }
 }
 
 circle:hover {
@@ -398,4 +402,78 @@ circle.selected {
 .language-item .percent {
   color: #7a8190;
   font-size: 0.9rem;
+}
+
+/* ===== Lab 8: commit-progress slider ===== */
+.slider {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  margin-block: 1.5em;
+}
+
+.slider input {
+  flex: 1;
+  width: auto;
+}
+
+.slider time {
+  margin-left: auto;
+  font-weight: 400;
+  color: #7a8190;
+  white-space: nowrap;
+}
+
+/* ===== Lab 8: file unit visualization ===== */
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 0.4em 1em;
+  margin-block: 2em;
+}
+
+#files > div {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  border-bottom: 1px solid color-mix(in oklch, canvastext 12%, transparent);
+  padding-block: 0.3em;
+}
+
+#files dt {
+  grid-column: 1;
+  margin: 0;
+}
+
+#files dt code {
+  font-size: 0.85em;
+  word-break: break-all;
+}
+
+#files dt small {
+  display: block;
+  font-size: 0.7em;
+  color: #7a8190;
+  font-weight: 400;
+  font-family: system-ui, sans-serif;
+  margin-top: 0.15em;
+}
+
+#files dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
+}
+
+.loc {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  background: var(--color, steelblue);
+  border-radius: 50%;
 }
