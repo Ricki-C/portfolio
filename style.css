@@ -380,7 +380,8 @@ circle.selected {
 
 .language-breakdown {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
   margin-top: 0.75rem;
   margin-bottom: 2rem;
 }
@@ -422,6 +423,96 @@ circle.selected {
   font-weight: 400;
   color: #7a8190;
   white-space: nowrap;
+}
+
+/* ===== Lab 8: scrollytelling ===== */
+#scrolly-1 {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.75fr) minmax(34rem, 1.7fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  width: min(1180px, calc(100vw - 3rem));
+  margin: 2rem 50%;
+  transform: translateX(-50%);
+}
+
+#scrolly-1 > * {
+  min-width: 0;
+}
+
+#scatter-story {
+  position: relative;
+  padding-top: 4.5rem;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+  height: calc(100vh - 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+#scatter-plot h2 {
+  margin-top: 0;
+}
+
+#chart {
+  width: 100%;
+}
+
+#chart svg {
+  display: block;
+  width: 100%;
+  max-height: 68vh;
+  height: auto;
+}
+
+.step {
+  box-sizing: border-box;
+  min-height: 24vh;
+  padding: 1rem 0 1rem 1rem;
+  border-left: 0.25rem solid transparent;
+  color: color-mix(in oklch, canvastext 72%, canvas 28%);
+  transition: 200ms;
+}
+
+.step p {
+  margin: 0 0 0.8rem;
+  max-width: 30ch;
+}
+
+.step.is-active {
+  border-left-color: var(--color-hover);
+  color: canvastext;
+}
+
+.step a {
+  color: inherit;
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  #scrolly-1 {
+    display: block;
+    width: auto;
+    margin: 2rem 0;
+    transform: none;
+  }
+
+  #scatter-plot {
+    top: 0;
+    height: auto;
+    padding-block: 0.75rem;
+    background: canvas;
+    z-index: 1;
+  }
+
+  .step {
+    min-height: 28vh;
+    padding: 1rem 0 1rem 1rem;
+  }
 }
 
 /* ===== Lab 8: file unit visualization ===== */
@@ -477,3 +568,4 @@ circle.selected {
   background: var(--color, steelblue);
   border-radius: 50%;
 }
+
