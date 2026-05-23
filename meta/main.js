@@ -276,35 +276,73 @@ function updateFileDisplay(filteredCommits) {
     .attr('style', (d) => `--color: ${colors(d.type)}`);
 }
 
-function renderCommitStory(commitsToShow) {
-  d3.select('#scatter-story')
+function getCommitFileCount(commit) {
+  return d3.rollups(
+    commit.lines,
+    (D) => D.length,
+    (line) => line.file
+  ).length;
+}
+
+function getCumulativeLines(commit) {
+  return commits
+    .filter((d) => d.datetime <= commit.datetime)
+    .flatMap((d) => d.lines);
+}
+
+function renderStory(storySelector, commitsToShow, getStepHTML) {
+  d3.select(storySelector)
     .selectAll('.step')
     .data(commitsToShow, (d) => d.id)
     .join('div')
     .attr('class', 'step')
-    .html((d, i) => {
-      const fileCount = d3.rollups(
-        d.lines,
-        (D) => D.length,
-        (line) => line.file
-      ).length;
+    .html(getStepHTML);
+}
 
-      return `
-        <p>
-          On ${d.datetime.toLocaleString('en', {
-            dateStyle: 'full',
-            timeStyle: 'short',
-          })}, I made
-          <a href="${d.url}" target="_blank" rel="noopener noreferrer">
-            ${i === 0 ? 'my first commit' : `commit ${d.id.slice(0, 7)}`}
-          </a>.
-        </p>
-        <p>
-          I edited ${d.totalLines} ${d.totalLines === 1 ? 'line' : 'lines'}
-          across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
-        </p>
-      `;
-    });
+function renderScatterStory(commitsToShow) {
+  renderStory('#scatter-story', commitsToShow, (d, i) => {
+    const fileCount = getCommitFileCount(d);
+
+    return `
+      <p>
+        On ${d.datetime.toLocaleString('en', {
+          dateStyle: 'full',
+          timeStyle: 'short',
+        })}, I made
+        <a href="${d.url}" target="_blank" rel="noopener noreferrer">
+          ${i === 0 ? 'my first commit' : `commit ${d.id.slice(0, 7)}`}
+        </a>.
+      </p>
+      <p>
+        I edited ${d.totalLines} ${d.totalLines === 1 ? 'line' : 'lines'}
+        across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
+      </p>
+    `;
+  });
+}
+
+function renderFilesStory(commitsToShow) {
+  renderStory('#files-story', commitsToShow, (d, i) => {
+    const cumulativeLines = getCumulativeLines(d);
+    const fileCount = d3.group(cumulativeLines, (line) => line.file).size;
+
+    return `
+      <p>
+        By ${d.datetime.toLocaleString('en', {
+          dateStyle: 'full',
+          timeStyle: 'short',
+        })}, the codebase had ${cumulativeLines.length}
+        ${cumulativeLines.length === 1 ? 'line' : 'lines'}
+        across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
+      </p>
+      <p>
+        ${i === 0 ? 'The first commit' : `Commit ${d.id.slice(0, 7)}`}
+        accounts for ${d.totalLines}
+        ${d.totalLines === 1 ? 'visible line' : 'visible lines'} in the unit
+        visualization.
+      </p>
+    `;
+  });
 }
 
 function createBrushSelector(svg) {
@@ -471,7 +509,7 @@ function updateVisualizations(
 
   activeStoryCommitId = activeCommitId;
 
-  d3.select('#scatter-story')
+  d3.selectAll('.story')
     .selectAll('.step')
     .classed('is-active', (d) => d.id === activeCommitId);
 }
@@ -495,8 +533,14 @@ function updateStoryCommit(commit) {
 }
 
 function syncStoryToScroll() {
-  const steps = [...document.querySelectorAll('#scatter-story .step')];
+  const stories = [...document.querySelectorAll('.story')];
   const offset = window.innerHeight * 0.25;
+  const activeStory =
+    stories.find((story) => {
+      const rect = story.getBoundingClientRect();
+      return rect.top <= offset && rect.bottom >= offset;
+    }) || stories[0];
+  const steps = [...activeStory.querySelectorAll('.step')];
   let activeStep = steps[0];
 
   for (const step of steps) {
@@ -543,25 +587,26 @@ let storyScrollFrame = null;
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 renderScatterPlot(data, commits);
-renderCommitStory(commits);
+renderScatterStory(commits);
+renderFilesStory(commits);
 
 document
   .getElementById('commit-progress')
   .addEventListener('input', onTimeSliderChange);
 
 // Initial render uses the first story step; scrolling advances the filter.
-const scroller = scrollama();
-
-scroller
-  .setup({
-    container: '#scrolly-1',
-    step: '#scrolly-1 .step',
-    offset: 0.25,
-  })
-  .onStepEnter(onStepEnter);
+const scrollers = ['#scrolly-1', '#scrolly-2'].map((container) =>
+  scrollama()
+    .setup({
+      container,
+      step: `${container} .step`,
+      offset: 0.25,
+    })
+    .onStepEnter(onStepEnter)
+);
 
 window.addEventListener('resize', () => {
-  scroller.resize();
+  scrollers.forEach((scroller) => scroller.resize());
   syncStoryToScroll();
 });
 
