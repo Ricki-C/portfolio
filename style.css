@@ -407,25 +407,38 @@ circle.selected {
 
 /* ===== Lab 8: commit-progress slider ===== */
 .slider {
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: max-content minmax(16rem, 28rem) 28ch;
+  align-items: center;
   gap: 0.6em;
+  width: fit-content;
+  max-width: 100%;
   margin-block: 1.5em;
 }
 
 .slider input {
-  flex: 1;
-  width: auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .slider time {
-  margin-left: auto;
-  min-width: 20ch;
+  width: 28ch;
   font-weight: 400;
   color: #7a8190;
   font-variant-numeric: tabular-nums;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .slider {
+    grid-template-columns: 1fr;
+  }
+
+  .slider time {
+    width: auto;
+    text-align: left;
+  }
 }
 
 /* ===== Lab 8: scrollytelling ===== */
@@ -580,4 +593,5 @@ circle.selected {
   background: var(--color, steelblue);
   border-radius: 50%;
 }
+
 
