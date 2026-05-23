@@ -11,6 +11,15 @@
   <h1>Meta</h1>
   <p>This page includes stats about the code of this website.</p>
 
+  <label class="slider">
+    Show commits until:
+    <input type="range" id="commit-progress" min="0" max="100" value="100" />
+    <time id="commit-filter-time"></time>
+  </label>
+
+  <h2>Codebase by file</h2>
+  <dl id="files"></dl>
+
   <h2>Summary Stats</h2>
   <div id="stats"></div>
 
