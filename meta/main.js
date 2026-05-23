@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 
 let xScale;
 let yScale;
@@ -275,6 +276,37 @@ function updateFileDisplay(filteredCommits) {
     .attr('style', (d) => `--color: ${colors(d.type)}`);
 }
 
+function renderCommitStory(commitsToShow) {
+  d3.select('#scatter-story')
+    .selectAll('.step')
+    .data(commitsToShow, (d) => d.id)
+    .join('div')
+    .attr('class', 'step')
+    .html((d, i) => {
+      const fileCount = d3.rollups(
+        d.lines,
+        (D) => D.length,
+        (line) => line.file
+      ).length;
+
+      return `
+        <p>
+          On ${d.datetime.toLocaleString('en', {
+            dateStyle: 'full',
+            timeStyle: 'short',
+          })}, I made
+          <a href="${d.url}" target="_blank" rel="noopener noreferrer">
+            ${i === 0 ? 'my first commit' : `commit ${d.id.slice(0, 7)}`}
+          </a>.
+        </p>
+        <p>
+          I edited ${d.totalLines} ${d.totalLines === 1 ? 'line' : 'lines'}
+          across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
+        </p>
+      `;
+    });
+}
+
 function createBrushSelector(svg) {
   svg.call(d3.brush().on('start brush end', brushed));
 
@@ -294,7 +326,7 @@ function brushed(event) {
 
 function renderSelectionCount(selection) {
   const selectedCommits = selection
-    ? commits.filter((d) => isCommitSelected(selection, d))
+    ? filteredCommits.filter((d) => isCommitSelected(selection, d))
     : [];
 
   const countElement = document.querySelector('#selection-count');
@@ -306,7 +338,7 @@ function renderSelectionCount(selection) {
 
 function renderLanguageBreakdown(selection) {
   const selectedCommits = selection
-    ? commits.filter((d) => isCommitSelected(selection, d))
+    ? filteredCommits.filter((d) => isCommitSelected(selection, d))
     : [];
 
   const container = document.getElementById('language-breakdown');
@@ -316,7 +348,9 @@ function renderLanguageBreakdown(selection) {
     return;
   }
 
-  const requiredCommits = selectedCommits.length ? selectedCommits : commits;
+  const requiredCommits = selectedCommits.length
+    ? selectedCommits
+    : filteredCommits;
   const lines = requiredCommits.flatMap((d) => d.lines);
 
   const breakdown = d3.rollup(
@@ -405,23 +439,86 @@ function updateTooltipVisibility(isVisible) {
 }
 
 // ===== Slider: filter commits by date =====
-function onTimeSliderChange() {
-  commitProgress = Number(document.getElementById('commit-progress').value);
-  commitMaxTime = timeScale.invert(commitProgress);
+function formatCommitMaxTime(commitTime) {
+  return commitTime.toLocaleString('en', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  });
+}
+
+function updateVisualizations(
+  nextCommitMaxTime,
+  { syncSlider = true, activeCommitId = null } = {}
+) {
+  const slider = document.getElementById('commit-progress');
+
+  commitMaxTime = nextCommitMaxTime;
+  commitProgress = timeScale(commitMaxTime);
+
+  if (syncSlider) {
+    slider.value = commitProgress;
+  }
 
   document.getElementById('commit-filter-time').textContent =
-    commitMaxTime.toLocaleString('en', {
-      dateStyle: 'long',
-      timeStyle: 'short',
-    });
+    formatCommitMaxTime(commitMaxTime);
 
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   let filteredData = filteredCommits.flatMap((d) => d.lines);
 
-  // stats, scatter plot and file unit-viz all update from the same filter
   renderCommitInfo(filteredData, filteredCommits);
   updateScatterPlot(data, filteredCommits);
   updateFileDisplay(filteredCommits);
+
+  activeStoryCommitId = activeCommitId;
+
+  d3.select('#scatter-story')
+    .selectAll('.step')
+    .classed('is-active', (d) => d.id === activeCommitId);
+}
+
+function onTimeSliderChange() {
+  const sliderValue = Number(document.getElementById('commit-progress').value);
+  updateVisualizations(timeScale.invert(sliderValue), { syncSlider: false });
+}
+
+function onStepEnter(response) {
+  const commit = response.element.__data__;
+  updateStoryCommit(commit);
+}
+
+function updateStoryCommit(commit) {
+  if (!commit || commit.id === activeStoryCommitId) {
+    return;
+  }
+
+  updateVisualizations(commit.datetime, { activeCommitId: commit.id });
+}
+
+function syncStoryToScroll() {
+  const steps = [...document.querySelectorAll('#scatter-story .step')];
+  const offset = window.innerHeight * 0.25;
+  let activeStep = steps[0];
+
+  for (const step of steps) {
+    if (step.getBoundingClientRect().top <= offset) {
+      activeStep = step;
+    } else {
+      break;
+    }
+  }
+
+  updateStoryCommit(activeStep?.__data__);
+}
+
+function onStoryScroll() {
+  if (storyScrollFrame) {
+    return;
+  }
+
+  storyScrollFrame = requestAnimationFrame(() => {
+    storyScrollFrame = null;
+    syncStoryToScroll();
+  });
 }
 
 // ===== Load data and initialize =====
@@ -440,15 +537,36 @@ let timeScale = d3
 
 let commitMaxTime = timeScale.invert(commitProgress);
 let filteredCommits = commits;
+let activeStoryCommitId = null;
+let storyScrollFrame = null;
 
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 renderScatterPlot(data, commits);
+renderCommitStory(commits);
 
 document
   .getElementById('commit-progress')
   .addEventListener('input', onTimeSliderChange);
 
-// Initial render — slider starts at 100%, so this shows every commit and
-// also draws the stats + file unit-visualization for the first time.
-onTimeSliderChange();
+// Initial render uses the first story step; scrolling advances the filter.
+const scroller = scrollama();
+
+scroller
+  .setup({
+    container: '#scrolly-1',
+    step: '#scrolly-1 .step',
+    offset: 0.25,
+  })
+  .onStepEnter(onStepEnter);
+
+window.addEventListener('resize', () => {
+  scroller.resize();
+  syncStoryToScroll();
+});
+
+window.addEventListener('scroll', onStoryScroll);
+
+updateVisualizations(commits[0].datetime, {
+  activeCommitId: commits[0].id,
+});
