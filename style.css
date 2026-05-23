@@ -426,7 +426,8 @@ circle.selected {
 }
 
 /* ===== Lab 8: scrollytelling ===== */
-#scrolly-1 {
+#scrolly-1,
+#scrolly-2 {
   position: relative;
   display: grid;
   grid-template-columns: minmax(17rem, 0.75fr) minmax(34rem, 1.7fr);
@@ -436,16 +437,18 @@ circle.selected {
   transform: translateX(-50%);
 }
 
-#scrolly-1 > * {
+#scrolly-1 > *,
+#scrolly-2 > * {
   min-width: 0;
 }
 
-#scatter-story {
+.story {
   position: relative;
   padding-top: 4.5rem;
 }
 
-#scatter-plot {
+#scatter-plot,
+#files-plot {
   position: sticky;
   top: 1rem;
   align-self: flex-start;
@@ -454,7 +457,8 @@ circle.selected {
   flex-direction: column;
 }
 
-#scatter-plot h2 {
+#scatter-plot h2,
+#files-plot h2 {
   margin-top: 0;
 }
 
@@ -494,14 +498,16 @@ circle.selected {
 }
 
 @media (max-width: 800px) {
-  #scrolly-1 {
+  #scrolly-1,
+  #scrolly-2 {
     display: block;
     width: auto;
     margin: 2rem 0;
     transform: none;
   }
 
-  #scatter-plot {
+  #scatter-plot,
+  #files-plot {
     top: 0;
     height: auto;
     padding-block: 0.75rem;
@@ -520,7 +526,10 @@ circle.selected {
   display: grid;
   grid-template-columns: 1fr 4fr;
   gap: 0.4em 1em;
-  margin-block: 2em;
+  margin-block: 1em 0;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
 #files > div {
