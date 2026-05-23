@@ -420,8 +420,11 @@ circle.selected {
 
 .slider time {
   margin-left: auto;
+  min-width: 20ch;
   font-weight: 400;
   color: #7a8190;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
   white-space: nowrap;
 }
 
